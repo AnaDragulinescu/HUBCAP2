@@ -57,7 +57,7 @@ const char* topicCO2 ="hubcap/sensors/CCS811_CO2";
 CCS811 mySensor(CCS811_ADDR);
 
 
-char* json_format(const char* tip, float valoare, const char* unitate)
+void json_format(const char* tip, float valoare, const char* unitate, char* output)
 {
 
 StaticJsonDocument<1000> doc;
@@ -74,8 +74,8 @@ infos_0["type"] = tip;
 infos_0["value"] = valoare;
 infos_0["unit"] = unitate;
 
-char output[256];
-serializeJson(doc, output);
+// char output[256];
+serializeJson(doc, output, 256);
 
 
 // char buffer[512];
@@ -93,7 +93,7 @@ while(!timeClient.update()) {
   // serializeJsonPretty(doc, buffer); 
   
   // Serial.println(buf);
-  return output;
+  // return output;
   }
 
 
@@ -170,17 +170,17 @@ void fun_publish(float Sensorvalue, const char* topicSensor, const char* SensorU
     // Serial.print(buf);
     // Serial.println(SensorString);
 
-    const char* buf = "";
-    strcpy(json_format(nameSensor, Sensorvalue, SensorUnit), buf);
+    char output[256];
+    json_format(nameSensor, Sensorvalue, SensorUnit, output);
     // const char* payload = json_format(nameSensor, Sensorvalue, SensorUnit);
 
     
     
     Serial.println("payload:");
-    Serial.println(buf);
+    Serial.println(output);
     Serial.println("################################3");
     // Serial.print(&payload);
-    client.publish(topicSensor, buf);
+    client.publish(topicSensor, output);
     
 }
 
