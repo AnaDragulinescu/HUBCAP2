@@ -173,6 +173,7 @@ void fun_publish(float Sensorvalue, const char* topicSensor, const char* SensorU
 void loop() {
   // put your main code here, to run repeatedly:
   delay(200);
+  //values specific to ESP32
 const float max_volt = 1.1;
 const float quan_M = 4095.0;
   float valueCO = max_volt*analogRead(pinCO)/quan_M;
