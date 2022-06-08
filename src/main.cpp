@@ -6,7 +6,9 @@
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 #include <PubSubClient.h>
+\\import your file in src folder or change the absolute path
 #include "F:\HUBCAP\varib.h"
+
 #define CCS811_ADDR 0x5B //Default I2C Address
 
 //insert the ssid and password for your Wi-Fi network
